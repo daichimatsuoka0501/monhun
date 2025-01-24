@@ -1,0 +1,210 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+var running, t, v0;
+ρσ_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    var version, print, arange, __name__, type, ρσ_ls, scene, g, h, v0, running, t, ball1, ball2, run_button, reset_button, velocity_label;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "4";
+    scene = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({center: vec(10, 10, 0), width: 800, height: 800, range: 20})]);
+    "7";
+    g = 9.8;
+    "8";
+    h = .005;
+    "9";
+    v0 = 10;
+    "10";
+    running = false;
+    "11";
+    t = 0;
+    "14";
+    ball1 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(0, 20, 0), radius: .5, color: color.red, make_trail: true})]);
+    "15";
+    ball2 = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(20, 20, 0), radius: .5, color: color.blue, make_trail: true})]);
+    "16";
+    ball1.vel = vec(v0, 0, 0);
+    "17";
+    ball2.vel = vec(0, 0, 0);
+    "20";
+    ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ vec(0, 0, 0), vec(23, 0, 0) ]), color: color.white})]);
+    "21";
+    ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ vec(0, 0, 0), vec(0, 20, 0) ]), color: color.white})]);
+    "24";
+    async function RunPause() {
+        "25";
+        "26";
+        running = !running;
+        "27";
+        if (running) {
+            "28";
+            run_button.text = "Pause";
+            "29";
+        } else {
+            "30";
+            run_button.text = "Run";
+        }
+    };
+    if (!RunPause.__module__) Object.defineProperties(RunPause, {
+        __module__ : {value: null}
+    });
+
+    "32";
+    async function Reset() {
+        "33";
+        "34";
+        running = false;
+        "35";
+        ball1.pos = vec(0, 20, 0);
+        "36";
+        ball2.pos = vec(20, 20, 0);
+        "37";
+        ball1.clear_trail();
+        "38";
+        ball2.clear_trail();
+        "39";
+        ball1.vel = vec(v0, 0, 0);
+        "40";
+        ball2.vel = vec(0, 0, 0);
+        "41";
+        t = 0;
+    };
+    if (!Reset.__module__) Object.defineProperties(Reset, {
+        __module__ : {value: null}
+    });
+
+    "44";
+    async function update_velocity(s) {
+        "45";
+        "46";
+        v0 = s.value;
+        "47";
+        ball1.vel = vec(v0, 0, 0);
+        "48";
+        velocity_label.text = "Initial Velocity: "["+"](ρσ_str.format("{:.1f}", v0))["+"](" m/s");
+    };
+    if (!update_velocity.__argnames__) Object.defineProperties(update_velocity, {
+        __argnames__ : {value: ["s"]},
+        __module__ : {value: null}
+    });
+
+    "51";
+    run_button = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "Run", bind: RunPause})]);
+    "52";
+    reset_button = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "Reset", bind: Reset})]);
+    "53";
+    scene.append_to_caption("\n");
+    "55";
+    velocity_label = ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({text: "Initial Velocity: "["+"](ρσ_str.format("{:.1f}", v0))["+"](" m/s")})]);
+    "56";
+    scene.append_to_caption("\n");
+    "57";
+    ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({min: 5, max: 20, value: 10, step: .1, length: 300, bind: update_velocity})]);
+    "58";
+    scene.append_to_caption("\n");
+    "61";
+    while (true) {
+        "62";
+        (await rate(100));
+        "63";
+        if (running) {
+            "65";
+            ball1.pos=ball1.pos["+"](ball1.vel["*"](h));
+            "66";
+            ball1.vel=ball1.vel["+"](vec(0, 1["-u"]()["*"](g), 0)["*"](h));
+            "67";
+            ball2.pos=ball2.pos["+"](ball2.vel["*"](h));
+            "68";
+            ball2.vel=ball2.vel["+"](vec(0, 1["-u"]()["*"](g), 0)["*"](h));
+            "69";
+            t=t["+"](h);
+            "72";
+            if (mag(ball1.pos["-"](1["*"](ball2.pos)))["<"](.1)) {
+                "73";
+                if (ball1.pos.y[">"](0)) {
+                    "74";
+                    print("ハント成功！接触時刻: t = "["+"](ρσ_str.format("{:.2f}", t))["+"](" s, 接触座標: ")["+"](ρσ_str.format("{}", ball1.pos))["+"](""));
+                    "75";
+                } else {
+                    "76";
+                    print("ハント失敗！接触時刻: t = "["+"](ρσ_str.format("{:.2f}", t))["+"](" s"));
+                }
+                "77";
+                running = false;
+                "78";
+            }
+            if (ball1.pos.y["<="](0)) {
+                "79";
+                print("ハント失敗！y=0 に到達しました。t = "["+"](ρσ_str.format("{:.2f}", t))["+"](" s"));
+                "80";
+                running = false;
+            }
+        }
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
